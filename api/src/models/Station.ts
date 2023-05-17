@@ -3,49 +3,58 @@ import * as Sequelize from 'sequelize'
 import sequelize from '../utils/db.connect'
 
 export type stationDocument = {
-    stationId: string
-    name: string
-    address: string
+    station_id: number
+    fin_name: string
+    swe_name: string
+    fin_address: string
+    swe_address: string
+    city: string
     operator: string
     capacity: number
-    coordinates: string[]
-    xCoordinate: number
-    yCoodinate: number
+    x_coordinate: number
+    y_coordinate: number
 }
 
 const Station = sequelize.define('station', {
-    stationId: {
+    station_id: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    name: {
+    fin_name: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    address: {
+    swe_name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    fin_address: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    swe_address: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    city: {
         type: Sequelize.STRING,
         allowNull: false
     },
     operator: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
     },
     capacity: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    coordinates: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    xCoordinate: {
+    x_coordinate: {
         type: Sequelize.FLOAT,
         allowNull: false
     },
-    yCoordinate: {
+    y_coordinate: {
         type: Sequelize.FLOAT,
         allowNull: false
     }
-})
+}, { timestamps: false })
 
 export default Station

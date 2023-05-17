@@ -1,11 +1,15 @@
 import { Sequelize } from 'sequelize'
+//import dotenv from 'dotenv'
+
+//dotenv.config({ path: '../../.env' })
 
 const dbParams = {
-    HOST: "localhost",
+    HOST: "127.0.0.1",
     USER: "postgres",
-    PASSWORD: "123",
-    DB: "testdb",
+    PASSWORD: "webAfrique",
+    DB: "citybike",
     dialect: "postgres",
+    port: "5433",
     pool: {
       max: 5,
       min: 0,
@@ -18,7 +22,9 @@ const dbParams = {
 const sequelize = new Sequelize(dbParams.DB, dbParams.USER, dbParams.PASSWORD, {
     host: dbParams.HOST,
     dialect: dbParams.dialect,
-    operatorsAliases: false,
+    operatorsAliases: 0,
+    port: dbParams.port,
+    logging: false,
   
     pool: {
       max: dbParams.pool.max,
