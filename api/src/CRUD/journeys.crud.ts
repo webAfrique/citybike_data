@@ -1,4 +1,4 @@
-import Journey, { journeyDocument } from "src/models/Journey";
+import Journey, { journeyDocument } from "../models/Journey.js";
 
 export const create = async (data: journeyDocument) => {
     try {
@@ -9,15 +9,3 @@ export const create = async (data: journeyDocument) => {
       }
 }
 
-export const findById = async (id:string) => {
-  try {
-    const trip = await Journey.findOne({
-      where: {
-        id
-      }
-    })
-    return trip
-  } catch (err) {
-    return err
-  }
-};

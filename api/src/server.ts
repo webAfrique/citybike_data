@@ -1,51 +1,27 @@
-import * as Express from 'express'
-import * as cors from 'cors'
+import express from 'express'
+import cors from 'cors'
 
 import sequelize from './utils/db.connect.js'
-import Journey from './models/Journey'
-import Station from './models/Station'
-import { findById } from './CRUD/journeys.crud.js'
 
-try {
-  //sequelize.sync({force: true})
-  Journey.sequelize.sync()
-  Station.sequelize.sync()
-}
-catch (error) {
-  console.log(error)
-}
-
-const app = Express()
+const app = express()
 
 const corsOptions = {
     origin: "http://localhost:8080"
   };
   
 app.use(cors(corsOptions));
-  
-// parse requests of content-type - application/json
-app.use(Express.json());
-  
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(Express.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-  res.send('wetin dey happen sef?')
-});
-
-app.get('/journeys/:id', async (req, res) => {
-  const id = req.params.id;
-  try {
-    const trip = await findById(id);
-    res.send(trip);
-  } catch (err) {
-    res.send(err);
-  }
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
-// set port, listen for requests
+sequelize.authenticate().then(() => {
+  console.log('Database connected...');
+}).catch(err => {
+  console.log('Database connection failed: ' + err);
+})
+
+
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+sequelize.sync().then(() => {
+  app.listen(PORT, () => console.log(`The server dey run for port ${PORT}`));
+}).catch(err => console.log("Error: " + err));
