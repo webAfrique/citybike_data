@@ -6,3 +6,7 @@ node_modules/
 
 # Compiled Typescript
 dist
+
+# Dummy files
+stations.csv
+journeys.csv

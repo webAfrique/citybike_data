@@ -6,8 +6,7 @@ export type stationDocument = {
     station_id: number
     fin_name: string
     swe_name: string
-    fin_address: string
-    swe_address: string
+    address: string
     city: string
     operator: string
     capacity: number
@@ -18,7 +17,8 @@ export type stationDocument = {
 const Station = sequelize.define('station', {
     station_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     },
     fin_name: {
         type: Sequelize.STRING,
@@ -28,11 +28,7 @@ const Station = sequelize.define('station', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    fin_address: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    swe_address: {
+    address: {
         type: Sequelize.STRING,
         allowNull: false
     },
