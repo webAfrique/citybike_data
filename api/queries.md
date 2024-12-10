@@ -1,3 +1,30 @@
+TODO: Have a city page that displays insights about all stations in the city.
+TODO: Have a rankings page that shows stations with highest ranking metrics from all cities.
+
+### Single station questions
+
+## Basic Station Information
+City
+Capacity
+Highest in
+Neighbour(s)
+## Time-based queries
+Busiest day of week
+Busiest time of day
+## Distance and duration queries
+What is the total number of journeys starting from [station_name]?
+How many journeys ended at [station_name]?
+What is the total number of round trips (starting and ending at [station_name])?
+What is the shortest outbound/inbound journey?
+what is the longest outbound/inbound journey?
+What is the most frequent destination for outbount journeys?
+What is the most origin for inbound journeys?
+How many journeys from [station_name] are shorter than [X] meters?
+How many journeys from [station_name] are longer than [X] meters?
+How many journeys from [station_name] lasted less than [X] minutes?
+How many journeys ending at [station_name] lasted more than [X] minutes?
+
+
 Here are over 100 questions that combine details from both the station and journey datasets, covering a variety of analysis perspectives:
 
 ### Basic Combined Questions
