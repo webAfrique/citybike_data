@@ -1,0 +1,52 @@
+{
+    "prompt": "What is the average journey duration for trips starting from Kamppi station?",
+    "completion": "SELECT AVG(duration_sec) FROM journeys WHERE departure_station ILIKE '%Kamppi%';"
+}
+{
+    "prompt": "List all stations operated by 'CityBike' in Espoo with a capacity of more than 30.",
+    "completion": "SELECT fin_name, capacity FROM stations WHERE operator = 'CityBike Finland' AND city = 'Espoo' AND capacity > 30;"
+}
+{
+    "prompt": "Which station has the highest bike capacity in Helsinki?",
+    "completion": "SELECT fin_name, capacity FROM stations WHERE city = 'Helsinki' ORDER BY capacity DESC LIMIT 1;"
+}
+{
+    "prompt": "Find the total distance covered by journeys departing from Gyldenintie station.",
+    "completion": "SELECT SUM(distance_m) FROM journeys WHERE departure_station LIKE '%Gyldenintie%';"
+}
+{
+    "prompt": "List all stations with a capacity of at least 20 and a Finnish address containing 'tie'",
+    "completion": "SELECT fin_name, capacity FROM stations WHERE capacity >= 20 AND fin_name LIKE '%tie%';"
+}
+{
+    "prompt": "How many journeys were made in May 2021?",
+    "completion": "SELECT COUNT(*) FROM journeys WHERE DATE_PART('month', departure) = 4 AND DATE_PART('year', departure) = 2024;"
+}
+{
+    "prompt": "Get the top 5 most popular return stations for journeys in January.",
+    "completion": "SELECT return_station, COUNT(*) as count FROM journeys WHERE DATE_PART('month', return) = 1 GROUP BY return_station ORDER BY count DESC LIMIT 5;"
+}
+{
+    "prompt": "What is the average distance of journeys starting from each station?",
+    "completion": "SELECT departure_station, AVG(distance_m) as avg_distance FROM journeys GROUP BY departure_station;"
+}
+{
+    "prompt": "Retrieve all journeys longer than 10 kilometers and lasting over 30 minutes.",
+    "completion": "SELECT * FROM journeys WHERE distance_m > 10000 AND duration_sec > 1800;"
+}
+{
+    "prompt": "Which station has the highest number of journeys ending at Pasilan asema?",
+    "completion": "SELECT departure_station, COUNT(*) as count FROM journeys WHERE return_station LIKE '%Pasilan asema%' GROUP BY departure_station ORDER BY count DESC LIMIT 1;"
+}
+{
+    "prompt": "How many journeys started from Kalasatama between 10:00 and 12:00?",
+    "completion": "SELECT COUNT(*) FROM journeys WHERE departure_station LIKE '%Kalasatama%' AND DATE_PART('hour', departure) >= 10 AND DATE_PART('hour', departure) < 12;"
+}
+{
+    "prompt": "How many journeys started at Hanasaari in May?",
+    "completion": "SELECT COUNT(*) FROM journeys WHERE departure_station LIKE '%Hanasaari%' AND DATE_PART('month', departure) = 5;"
+}
+{
+    "prompt": "List the coordinates of stations with capacities between 15 and 50",
+    "completion": "SELECT fin_name, latitude, longitude FROM stations WHERE capacity BETWEEN 40 AND 50;"
+}

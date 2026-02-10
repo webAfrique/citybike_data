@@ -1,4 +1,6 @@
+import pg from 'pg'
 import Sequelize from 'sequelize'
+
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -6,14 +8,23 @@ dotenv.config()
 const password = process.env.DB_PASSWORD
 const user = "postgres"
 const database = "citybike"
-//const host = process.env.DB_REMOTE_URI
+const host = "localhost"	
+const port = 5433
 
+const { Client } = pg
+export const db = new Client({
+	user,
+	password,
+	host,
+	port,
+	database,
+});
 
-const sequelize = new Sequelize(database, user, password, {
-    host: 'localhost',
+export const sequelize = new Sequelize(database, user, password, {
+    host,
     dialect: "postgres",
     operatorsAliases: 0,
-    port: 5433,
+    port,
     logging: false,
   
     pool: {
@@ -24,4 +35,4 @@ const sequelize = new Sequelize(database, user, password, {
     }
 })
 
-export default sequelize
+//export default sequelize

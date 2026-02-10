@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize'
 
-import sequelize from '../utils/db.connect.js'
+import { sequelize } from '../utils/db.connect.js'
 
 export type stationDocument = {
     station_id: number

@@ -4,7 +4,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 
-import sequelize from './utils/db.connect.js'
+import { sequelize, db } from './utils/db.connect.js'
 import stationsRoute from './routes/stations.routes.js'
 
 const app = express()
@@ -12,7 +12,7 @@ const app = express()
 //dotenv.config()
 
 const corsOptions = {
-    origin: "http://localhost:8080"
+    origin: "http://localhost:3000"
   };
   
 app.use(cors(corsOptions))
@@ -23,17 +23,16 @@ app.use('/stations', stationsRoute)
 
 
 
-sequelize.authenticate().then(() => {
+/* sequelize.authenticate().then(() => {
   console.log('Database connected...')
 }).catch((err:string) => {
   console.log('Database connection failed: ' + err)
 })
+ */
 
-
-const PORT = process.env.PORT || 8080
-sequelize.sync().then(() => {
+/* sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`The server dey run for port ${PORT}`))
-}).catch((err:string) => console.log("Error: " + err))
+}).catch((err:string) => console.log("Error: " + err)) */
 
 /*PG CONNECTION */
 
@@ -54,5 +53,11 @@ sequelize.sync().then(() => {
 //   port: 5433,
 // })
 
-// const PORT = process.env.PORT || 8080
-// app.listen(PORT, () => console.log(`The server dey run for port ${PORT}`))
+db.connect().then(() => {
+  console.log('Database connected...')
+}).catch((err:string) => {
+  console.log('Database connection failed: ' + err)
+})
+
+const PORT = process.env.PORT || 8080
+app.listen(PORT, () => console.log(`The server dey run for port ${PORT}`))

@@ -1,6 +1,5 @@
-import sequelize from '../utils/db.connect.js'
-import { QueryTypes } from 'sequelize'
-//import { pool } from '../server.js'
+import { sequelize, db } from '../utils/db.connect.js'
+//import { QueryTypes } from 'sequelize'
 import Station, { stationDocument } from '../models/Station.js'
 //import sequelize from 'sequelize'
 
@@ -12,18 +11,52 @@ export const addStation = async (data: stationDocument) => {
     }
 }
 
+/* export const getStationById = async ( id: number ) => {
+  try {
+    const station = await Station.findOne({ 
+      where: { station_id: id },
+      raw: true,
+    })
+    //const station = await pool.query(`SELECT * FROM stations WHERE "station_id" = ${id}`)
+    //const station = await sequelize.query(`SELECT * FROM stations WHERE "station_id" = ${id}`)
+    return station
+  } catch (err) {
+    return err
+  }
+} */
+
 export const getStationById = async ( id: number ) => {
   try {
-    //const station = await Station.findOne( { where: { station_id: id }} )
-    //const station = await pool.query(`SELECT * FROM stations WHERE "station_id" = ${id}`)
-    const station = await sequelize.query(`SELECT * FROM stations WHERE "station_id" = ${id}`)
-    return station[0]
+    const station = (await db.query(`SELECT * FROM stations WHERE "station_id" = ${id}`)).rows[0]
+    return station
   } catch (err) {
     return err
   }
 }
 
-const getFinName = async (name:string) => {
+/* export const getAllStationNames = async () => {
+  const result = await Station.findAll({
+    attributes: ['fin_name'],
+    raw: true,
+  })
+  const stationNames = result.map((item) => item.fin_name)
+  return stationNames
+  //console.log(stationNames)
+} */
+
+export const getAllStationNames = async () => {
+  try {
+    const stations = await db.query(
+      `SELECT "fin_name" FROM stations`,
+    )
+      
+    return stations
+  } catch (err) {
+    return err
+  }
+}
+
+const getStationByFinName = async (name:string) => {
   const station = await Station.findOne( { where: { fin_name: name }} )
   return station
 }
@@ -79,7 +112,9 @@ export const deleteStation = async ( id: number ) => {
 
 export default {
   addStation,
+  getAllStationNames,
   getStationById,
+  getStationByFinName,
   updateStation,
   deleteStation,
   searchStations
