@@ -7,6 +7,12 @@ node_modules/
 # Compiled Typescript
 dist
 
-# Dummy files
-stations.csv
-journeys.csv
+# Utility files
+hsl_stations.csv
+hsl_journeys.csv
+src/training_data.jsonl
+queries.md
+images
+
+# Playground/testing files
+src/test.js

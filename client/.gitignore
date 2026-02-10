@@ -1,3 +1,6 @@
+# Temporarily
+README.md
+
 # Logs
 logs
 *.log
@@ -24,3 +27,13 @@ dist-ssr
 *.sw?
 
 .env
+
+# Utils
+
+hsl_journeys.csv
+hsl_stations.csv
+images
+
+# LAB
+src/sandbox.tsx
+
